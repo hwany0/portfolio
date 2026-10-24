@@ -143,14 +143,16 @@
   - IIS/ClickOnce 기반 배포 과정에서 NAS 권한 불일치 문제를 정리해 배포 안정성을 확보
 - 기술 스택: C#, .NET Framework, WinForm, FarPoint Spread 9, IIS, ClickOnce, NAS
 
-### 11. 옥외 광고 청약 시스템 SaaS 구축 프로젝트
-- 기간: 2026.09 ~ 2026.12
-- 역할: 레거시 전환, 공통 인프라 정비, 인증/인가 구조 설계
+### 11. 옥외 광고 청약 시스템 SaaS 전환 및 공통 아키텍처 정비
+- 기간: 2026.09 ~ 진행 중
+- 역할: 백엔드 공통 구조 정비, 레거시 전환, 인증/인가 구조 설계 및 구현
 - 내용:
-  - 전자정부프레임워크 레거시 프로젝트를 Spring Boot 3.5.0 / Java 17 환경으로 전환
-  - PowerBuilder XTM 화면을 Thymeleaf 기반으로 전환하는 과정 지원
-  - 의존성 정리, 공통 예외 처리, 응답 DTO 표준화, 인증/인가 구조 설계 및 적용 중
-- 기술 스택: Java 17, Spring Boot 3.5.0, Thymeleaf, MSSQL, nginx, wildfly
+  - 기존 Java 8 / Spring Framework 기반 시스템을 Java 17 / Spring Boot 3.5.x 기반으로 전환하고 Gradle/JAR 실행 구조를 정비
+  - 기존 JSP 화면의 Thymeleaf 전환을 위한 공통 렌더링 구조와 화면 데이터 제공 방식을 정리
+  - 전자정부프레임워크 의존성을 줄이고 공통 설정, API 응답 DTO, 전역 예외 처리 구조를 표준화하는 작업 진행
+  - 조직 권한, 매체 권한, 사용자 그룹 권한을 구분하고 AOP 기반 공통 권한 검증 구조를 설계·적용 중
+  - 메뉴 노출 제어와 서버 측 API 인가를 구분하고, 요청 매체 ID와 사용자 권한 범위를 검증하는 정책을 정리
+- 기술 스택: Java 17, Spring Boot 3.5.x, Gradle, MyBatis, MSSQL, Thymeleaf
 
 ### 12. 사내 AI 활용 UI/UX 개선 사례 공유
 - 기간: 2026.09
