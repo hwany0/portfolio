@@ -48,14 +48,12 @@
 - ActiveX 지원 종료 대응 및 배포 안정화 사례
 
 ## 관련 문서
+- [이력서 초안](./docs/resume.md)
+- [경력기술서 초안](./docs/career-description.md)
 - [경력 경험 상세](./docs/experience.md)
 - [주요 프로젝트 상세](./docs/projects.md)
 - [SaaS 전환 및 공통 아키텍처 정비](./docs/saas-modernization.md)
-- [JAMIS 운영 대응 사례](./docs/jamis-ops.md)
 - [J-Mobile 운영 및 보안 대응 사례](./docs/jmobile-ops.md)
-- [사내 AI 활용 UI/UX 개선 사례 공유](./docs/ai-ux-case.md)
-- [J-Custom ActiveX 지원 종료 대응 방안 개발](./docs/jcustom-activex-support.md)
-- [J-Custom 운영 개선 및 기술 대응 사례](./docs/jcustom-ops-improvements.md)
 
 ## 기술 스택
 ### Languages
