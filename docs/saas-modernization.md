@@ -85,24 +85,26 @@ public record ApiResponse<T>(
 
 공통 응답 형식을 통해 Controller마다 서로 다른 응답 구조를 만드는 일을 줄이고, 클라이언트가 성공·실패 결과를 일관되게 처리하도록 하는 패턴이다.
 
-### AOP 기반 권한 검증의 개념 예시
+### `@CheckScope` 적용 예시
+
+아래는 프로젝트에서 사용하는 `@CheckScope`의 정책 선언 형태를 보여주는 축약 예시다. 실제 API에는 해당 API가 허용해야 하는 범위와 전체 조회 정책에 맞는 값을 지정한다.
 
 ```java
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface RequireMediaAccess {
-    String mediaIdParameter() default "mediaId";
+@CheckScope(
+    value = {"Media", "Company"},
+    company = ANY,
+    media = ANY,
+    allowCompanyAll = true,
+    allowMediaAll = true
+)
+public SearchResponse search(SearchRequest request) {
+    return searchService.search(request);
 }
 ```
 
-```java
-@RequireMediaAccess(mediaIdParameter = "mediaId")
-public MediaDetailResponse getMediaDetail(String mediaId) {
-    return mediaService.getDetail(mediaId);
-}
-```
+이 예시는 소속과 매체를 모두 검증 대상으로 지정하고, 해당 API에서 허용 범위 및 전체 조회를 넓게 설정하는 경우를 나타낸다. 모든 API에 `ANY`와 전체 조회 허용 옵션을 적용한다는 뜻은 아니다. 실제 정책은 API의 업무 요구사항과 사용자 권한에 맞게 제한해야 한다.
 
-Controller는 업무 처리에 집중하고, 공통 권한 검증 계층이 인증 사용자와 요청 매체 ID를 비교하는 방식이다. 실제 적용 시에는 파라미터 해석 방식, 메서드 오버로드, 복수 권한 조건, 목록 조회처럼 여러 매체를 다루는 API를 명확히 정의하고, 권한 검증 누락을 테스트로 확인해야 한다.
+AOP는 메서드 파라미터를 분석해 DTO 또는 개별 파라미터에서 소속·매체 코드를 추출하고, 사용자 권한과 어노테이션에 선언된 정책을 기준으로 공통 검증을 수행한다. Validator는 어노테이션 속성의 잘못된 사용을 애플리케이션 시작 시점에 검출한다. 다만 어노테이션 자체의 누락을 자동 검출하는 기능은 아니므로, README의 적용 기준과 코드 리뷰를 보완책으로 사용한다.
 
 ### 전역 예외 처리의 개념 예시
 
