@@ -97,8 +97,8 @@ public record ApiResponse<T>(
     allowCompanyAll = true,
     allowMediaAll = true
 )
-public SearchResponse search(SearchRequest request) {
-    return searchService.search(request);
+public ApiResponse<SearchResponse> search(SearchRequest request) {
+    return ApiResponse.ok(searchService.search(request));
 }
 ```
 
